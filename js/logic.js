@@ -1,4 +1,4 @@
-var fsa;
+﻿var fsa;
 var stations;
 var lines;
 
