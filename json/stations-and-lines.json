@@ -1,0 +1,73 @@
+﻿{
+	"stations" : [{
+			"id" : 1,
+			"name" : "Bellendorf",
+			"x" : 200,
+			"y" : 200,
+			"disconnected" : false
+		}, {
+			"id" : 2,
+			"name" : "Bergmannsglück",
+			"x" : 220,
+			"y" : 200,
+			"disconnected" : false
+		}, {
+			"id" : 3,
+			"name" : "Bochum",
+			"x" : 240,
+			"y" : 200,
+			"disconnected" : false
+		}, {
+			"id" : 4,
+			"name" : "Witten",
+			"x" : 260,
+			"y" : 200,
+			"disconnected" : false
+		}, {
+			"id" : 5,
+			"name" : "Mengede",
+			"x" : 280,
+			"y" : 200,
+			"disconnected" : false
+		}, {
+			"id" : 6,
+			"name" : "Eiberg",
+			"x" : 200,
+			"y" : 250,
+			"disconnected" : false
+		}, {
+			"id" : 7,
+			"name" : "Karnap",
+			"x" : 220,
+			"y" : 250,
+			"disconnected" : false
+		}, {
+			"id" : 8,
+			"name" : "Rosenblumendelle",
+			"x" : 240,
+			"y" : 250,
+			"disconnected" : false
+		}, {
+			"id" : 9,
+			"name" : "Büscherhof",
+			"x" : 260,
+			"y" : 250,
+			"disconnected" : false
+		}, {
+			"id" : 10,
+			"name" : "Hattingen",
+			"x" : 280,
+			"y" : 250,
+			"disconnected" : true
+		}
+		
+	],
+	"lines" : [{
+			"id" : 1,
+			"name" : "Polsum Süd",
+			"station1" : 2,
+			"station2" : 3,
+			"disconnected" : false
+		}
+	]
+}

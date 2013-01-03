@@ -1,17 +1,27 @@
+var stations;
+var lines;
+
 function init() {
 	draw();
 }
 
 function draw() {
-	d3.json("json/map.json", function(json) {
-		drawMap(json);
+	d3.json("json/map.json", function(mapDataJson) {
+		drawMap(mapDataJson);
+		drawFlag(mapDataJson);
+	});
+	d3.json("json/stations-and-lines.json", function(stationAndLineDataJson) {
+		stations = stationAndLineDataJson.stations;
+		lines = stationAndLineDataJson.lines;
+		drawStations(stationAndLineDataJson);
+		drawLines(stationAndLineDataJson);
 	});
 }
 
 function drawMap(mapDataJson) {
 	var svgContainer = d3.select("#map");
 	var borders = svgContainer.selectAll("line")
-							.data(mapDataJson.lines)
+							.data(mapDataJson.borders)
 							.enter()
 							.append("line");
 	borders.attr("x1", function(d) { return d.x1 })
@@ -20,6 +30,33 @@ function drawMap(mapDataJson) {
 		.attr("y2", function(d) { return d.y2; })
 		.attr("stroke-width", 2)
 		.attr("stroke", "black");
+}
+
+function drawFlag(mapDataJson) {
+	// TODO...
+}
+
+function drawStations(stationAndLineDataJson) {
+	var svgContainer = d3.select("#map");
+	var stations = svgContainer.selectAll("circle")
+							.data(stationAndLineDataJson.stations)
+							.enter()
+							.append("circle");
+	stations.attr("cx", function(d) { return d.x })
+		.attr("cy", function(d) { return d.y; })
+		.attr("r", function(d) { return 5; })
+		.style("fill", function(d) {
+                       var returnColor;
+                       if (d.disconnected) { returnColor = "darkslategrey"; }
+                       else { returnColor = "magenta"; }
+                       return returnColor;
+                     })
+		.append("svg:title")
+		.text(function(d) { return d.name; });
+}
+
+function drawLines(stationAndLineDataJson) {
+	// TODO...
 }
 
 function drawStatic() {
