@@ -20,8 +20,6 @@ function drawMap(mapDataJson) {
 		.attr("y2", function(d) { return d.y2; })
 		.attr("stroke-width", 2)
 		.attr("stroke", "black");
-
-	alert(borders);
 }
 
 function drawStatic() {
