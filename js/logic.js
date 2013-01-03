@@ -308,6 +308,8 @@ function addFsa() {
 	newFsa.stations = findStationsById($("#create-fsa-stations").val());
 	newFsa.lines = findLinesById($("#create-fsa-lines").val());
 	
+	fsa.fsa.push(newFsa);
+	
 	// TODO: Update graph...
 }
 
