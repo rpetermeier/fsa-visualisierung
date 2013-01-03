@@ -55,7 +55,7 @@ function drawFlag(mapDataJson) {
 
 function drawStations(stationAndLineDataJson) {
 	var svgContainer = d3.select("#map");
-	var stations = svgContainer.selectAll("circle")
+	var stations = svgContainer.selectAll("circle.station")
 							.data(stationAndLineDataJson.stations)
 							.enter()
 							.append("circle");
@@ -69,8 +69,35 @@ function drawStations(stationAndLineDataJson) {
                        else { returnColor = "magenta"; }
                        return returnColor;
                      })
-		.append("svg:title")
-		.text(function(d) { return d.name; });
+		.append("svg:title");
+	$('svg circle.station').tipsy({
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+			var d = this.__data__;
+			var tooltip = 'Station: <span class="tipsy-station-name">' + d.name + '</span>';
+			var relevantFsa = findFsaForStation(d.id);
+			if (relevantFsa.length > 0) {
+				tooltip += formatFsaInfo(relevantFsa);
+			}
+			return tooltip;
+        }
+    });
+}
+
+function formatFsaInfo(relevantFsa) {
+	var info = "";
+	info += '<div class="tipsy-fsa-info">';
+	info += 'Freigeschaltet durch:<ul class="tipsy-fsa-details">';
+	for (var ii = 0; ii < relevantFsa.length; ++ii) {
+		info += ("<li>" + relevantFsa[ii].fsaId + " (" + relevantFsa[ii].fsaName + ")<br />");
+		info += relevantFsa[ii].from + " - " + relevantFsa[ii].until + "<br />";
+		info += relevantFsa[ii].weekdayProfile + "<br />";
+		info += relevantFsa[ii].dailyOrContinuous;
+		info += "</li>";
+	}
+	info += "</ul></div>";
+	return info;
 }
 
 function drawLines(stationAndLineDataJson) {
@@ -91,8 +118,21 @@ function drawLines(stationAndLineDataJson) {
 						return returnColor;
 					})
 		.attr("class", "line")
-		.append("svg:title")
-		.text(function(d) { return d.name; });
+		.append("svg:title");
+		// .text(function(d) { return d.name; });
+		$('svg line.line').tipsy({
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+			var d = this.__data__;
+			var tooltip = 'Leitung: <span class="tipsy-line-name">' + d.name + '</span>';
+			var relevantFsa = findFsaForLine(d.id);
+			if (relevantFsa.length > 0) {
+				tooltip += formatFsaInfo(relevantFsa);
+			}
+			return tooltip;
+        }
+    });
 }
 
 function lookupStation(stationId) {
@@ -107,19 +147,31 @@ function lookupStation(stationId) {
 }
 
 function isLineDisconnected(lineId) {
-	var disconnected = false;
-	for (var ii = 0; ii < fsa.fsa.length; ++ii) {
-		disconnected |= ($.inArray(lineId, fsa.fsa[ii].lines) != -1);
-	}
-	return disconnected;
+	return findFsaForLine(lineId).length > 0;
 }
 
 function isStationDisconnected(stationId) {
-	var disconnected = false;
+	return findFsaForStation(stationId).length > 0;
+}
+
+function findFsaForStation(stationId) {
+	var result = new Array();
 	for (var ii = 0; ii < fsa.fsa.length; ++ii) {
-		disconnected |= ($.inArray(stationId, fsa.fsa[ii].stations) != -1);
+		if ($.inArray(stationId, fsa.fsa[ii].stations) != -1) {
+			result.push(fsa.fsa[ii]);
+		}
 	}
-	return disconnected;
+	return result;
+}
+
+function findFsaForLine(lineId) {
+	var result = new Array();
+	for (var ii = 0; ii < fsa.fsa.length; ++ii) {
+		if ($.inArray(lineId, fsa.fsa[ii].lines) != -1) {
+			result.push(fsa.fsa[ii]);
+		}
+	}
+	return result;
 }
 
 function drawStatic() {
