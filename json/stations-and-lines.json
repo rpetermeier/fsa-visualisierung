@@ -60,13 +60,19 @@
 			"y" : 250,
 			"disconnected" : true
 		}
-		
 	],
 	"lines" : [{
 			"id" : 1,
 			"name" : "Polsum Süd",
 			"station1" : 2,
 			"station2" : 3,
+			"disconnected" : false
+		},
+		{
+			"id" : 2,
+			"name" : "Kemnade Süd",
+			"station1" : 4,
+			"station2" : 10,
 			"disconnected" : false
 		}
 	]

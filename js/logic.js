@@ -29,7 +29,8 @@ function drawMap(mapDataJson) {
 		.attr("x2", function(d) { return d.x2; })
 		.attr("y2", function(d) { return d.y2; })
 		.attr("stroke-width", 2)
-		.attr("stroke", "black");
+		.attr("stroke", "black")
+		.attr("class", "border");
 }
 
 function drawFlag(mapDataJson) {
@@ -45,9 +46,10 @@ function drawStations(stationAndLineDataJson) {
 	stations.attr("cx", function(d) { return d.x })
 		.attr("cy", function(d) { return d.y; })
 		.attr("r", function(d) { return 5; })
+		.attr("class", "station")
 		.style("fill", function(d) {
                        var returnColor;
-                       if (d.disconnected) { returnColor = "darkslategrey"; }
+                       if (d.disconnected) { returnColor = "grey"; }
                        else { returnColor = "magenta"; }
                        return returnColor;
                      })
@@ -57,6 +59,36 @@ function drawStations(stationAndLineDataJson) {
 
 function drawLines(stationAndLineDataJson) {
 	// TODO...
+	var svgContainer = d3.select("#map");
+	var lines = svgContainer.selectAll("line.line")
+							.data(stationAndLineDataJson.lines)
+							.enter()
+							.append("line");
+	lines.attr("x1", function(d) { return lookupStation(d.station1).x; })
+		.attr("y1", function(d) { return lookupStation(d.station1).y; })
+		.attr("x2", function(d) { return lookupStation(d.station2).x; })
+		.attr("y2", function(d) { return lookupStation(d.station2).y; })
+		.attr("stroke-width", 2)
+		.attr("stroke", function(d) {
+						var returnColor;
+						if (d.disconnected) { returnColor = "grey"; }
+						else { returnColor = "magenta"; }
+						return returnColor;
+					})
+		.attr("class", "line")
+		.append("svg:title")
+		.text(function(d) { return d.name; });
+}
+
+function lookupStation(stationId) {
+	var station = null;
+	for (var ii = 0; ii < stations.length; ++ii) {
+		if (stations[ii] != null && stations[ii].id  == stationId) {
+			station = stations[ii];
+		}
+	}
+	
+	return station;
 }
 
 function drawStatic() {
@@ -64,7 +96,7 @@ function drawStatic() {
     //                                .attr("width", 900)
     //                               .attr("height", 800);
 	var svgContainer = d3.select("#map");
-	
+
 	var line = svgContainer.append("line")
                         .attr("x1", 50)
                         .attr("y1", 50)
