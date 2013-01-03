@@ -20,7 +20,7 @@ function draw() {
 
 function drawMap(mapDataJson) {
 	var svgContainer = d3.select("#map");
-	var borders = svgContainer.selectAll("line")
+	var borders = svgContainer.selectAll("line.border")
 							.data(mapDataJson.borders)
 							.enter()
 							.append("line");
@@ -34,7 +34,19 @@ function drawMap(mapDataJson) {
 }
 
 function drawFlag(mapDataJson) {
-	// TODO...
+	var svgContainer = d3.select("#map");
+	var flag = svgContainer.selectAll("rect.flag")
+							.data(mapDataJson.flag)
+							.enter()
+							.append("rect");
+	flag.attr("x", function(d) { return d.x; })
+		.attr("y", function(d) { return d.y; })
+		.attr("width", function(d) { return d.width; })
+		.attr("height", function(d) { return d.height; })
+		.attr("class", "flag")
+		.style("fill", function(d) { return d.color; })
+		.append("svg:title")
+		.text(function(d) { return d.text; });;
 }
 
 function drawStations(stationAndLineDataJson) {
