@@ -2,63 +2,75 @@
 	"stations" : [{
 			"id" : 1,
 			"name" : "Bellendorf",
-			"x" : 200,
-			"y" : 200,
+			"x" : 160,
+			"y" : 300,
 			"disconnected" : false
 		}, {
 			"id" : 2,
 			"name" : "Bergmannsglück",
-			"x" : 220,
-			"y" : 200,
+			"x" : 140,
+			"y" : 320,
 			"disconnected" : false
 		}, {
 			"id" : 3,
 			"name" : "Bochum",
-			"x" : 240,
-			"y" : 200,
+			"x" : 170,
+			"y" : 320,
 			"disconnected" : false
 		}, {
 			"id" : 4,
 			"name" : "Witten",
-			"x" : 260,
-			"y" : 200,
+			"x" : 190,
+			"y" : 320,
 			"disconnected" : false
 		}, {
 			"id" : 5,
 			"name" : "Mengede",
-			"x" : 280,
-			"y" : 200,
+			"x" : 190,
+			"y" : 300,
 			"disconnected" : false
 		}, {
 			"id" : 6,
 			"name" : "Eiberg",
-			"x" : 200,
-			"y" : 250,
+			"x" : 140,
+			"y" : 340,
 			"disconnected" : false
 		}, {
 			"id" : 7,
 			"name" : "Karnap",
-			"x" : 220,
-			"y" : 250,
+			"x" : 120,
+			"y" : 360,
 			"disconnected" : false
 		}, {
 			"id" : 8,
-			"name" : "Rosenblumendelle",
-			"x" : 240,
-			"y" : 250,
+			"name" : "Scholven",
+			"x" : 110,
+			"y" : 340,
 			"disconnected" : false
 		}, {
 			"id" : 9,
 			"name" : "Büscherhof",
-			"x" : 260,
-			"y" : 250,
+			"x" : 90,
+			"y" : 370,
 			"disconnected" : false
 		}, {
 			"id" : 10,
 			"name" : "Hattingen",
-			"x" : 280,
-			"y" : 250,
+			"x" : 180,
+			"y" : 340,
 			"disconnected" : true
+		}, {
+			"id" : 11,
+			"name" : "Kusenhorst",
+			"x" : 160,
+			"y" : 300,
+			"disconnected" : true
+		}, {
+			"id" : 12,
+			"name" : "Rosenblumendelle",
+			"x" : 100,
+			"y" : 320,
+			"disconnected" : false
 		}
 	],
 	"lines" : [{
@@ -73,6 +85,83 @@
 			"name" : "Kemnade Süd",
 			"station1" : 4,
 			"station2" : 10,
+			"disconnected" : false
+		},
+		{
+			"id" : 3,
+			"name" : "Scholven C",
+			"station1" : 1,
+			"station2" : 8,
+			"disconnected" : false
+		},
+		{
+			"id" : 4,
+			"name" : "Scholven D",
+			"station1" : 8,
+			"station2" : 11,
+			"disconnected" : false
+		},
+		{
+			"id" : 5,
+			"name" : "Weitmar West",
+			"station1" : 6,
+			"station2" : 10,
+			"disconnected" : false
+		},
+		{
+			"id" : 6,
+			"name" : "Bochum West",
+			"station1" : 3,
+			"station2" : 6,
+			"disconnected" : false
+		},
+		{
+			"id" : 7,
+			"name" : "Recklinghausen",
+			"station1" : 5,
+			"station2" : 11,
+			"disconnected" : false
+		},
+		{
+			"id" : 8,
+			"name" : "Witten West",
+			"station1" : 4,
+			"station2" : 5,
+			"disconnected" : false
+		},
+		{
+			"id" : 9,
+			"name" : "Eiberg Nord",
+			"station1" : 6,
+			"station2" : 7,
+			"disconnected" : false
+		},
+		{
+			"id" : 10,
+			"name" : "Büscherhof West >> Bein Rosenblumendelle",
+			"station1" : 9,
+			"station2" : 12,
+			"disconnected" : false
+		},
+		{
+			"id" : 11,
+			"name" : "Büscherhof West >> Bein Karnap",
+			"station1" : 7,
+			"station2" : 9,
+			"disconnected" : false
+		},
+		{
+			"id" : 12,
+			"name" : "Scholven",
+			"station1" : 8,
+			"station2" : 9,
+			"disconnected" : false
+		},
+		{
+			"id" : 13,
+			"name" : "Kusenhorst",
+			"station1" : 11,
+			"station2" : 12,
 			"disconnected" : false
 		}
 	]
