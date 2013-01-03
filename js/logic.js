@@ -49,8 +49,16 @@ function drawFlag(mapDataJson) {
 		.attr("height", function(d) { return d.height; })
 		.attr("class", "flag")
 		.style("fill", function(d) { return d.color; })
-		.append("svg:title")
-		.text(function(d) { return d.text; });;
+		.append("svg:title");
+		// .text(function(d) { return d.text; });
+	$('svg rect.flag').tipsy({
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+			var d = this.__data__;
+			return d.text;
+        }
+	});
 }
 
 function drawStations(stationAndLineDataJson) {
