@@ -16,6 +16,7 @@ function draw() {
 		d3.json("json/stations-and-lines.json", function(stationAndLineDataJson) {
 			stations = stationAndLineDataJson.stations;
 			lines = stationAndLineDataJson.lines;
+			initCreateFsaDialog(stations, lines);
 			drawStations(stationAndLineDataJson);
 			drawLines(stationAndLineDataJson);
 		});
@@ -195,4 +196,58 @@ function drawStatic() {
                         .attr("y2", 10)
 						.attr("stroke-width", 2)
                         .attr("stroke", "black");
+}
+
+function initCreateFsaDialog(stations, lines) {
+	var selectStations = $("#create-fsa-stations");
+	for (var ii = 0; ii < stations.length; ++ii) {
+		selectStations.append('<option value="' + stations[ii].id + '">' + stations[ii].name + '</option>');
+	}
+	selectStations.multiselect({
+		checkAllText: "alle",
+		uncheckAllText: "keine",
+		selectedText: "# ausgewählt",
+		noneSelectedText: "Station(en) auswählen...",
+		minWidth: 300
+		
+	});
+	var selectLines = $("#create-fsa-lines");
+	for (var ii = 0; ii < lines.length; ++ii) {
+		selectLines.append('<option value="' + lines[ii].id + '">' + lines[ii].name + '</option>');
+	}
+	selectLines.multiselect({
+		checkAllText: "alle",
+		uncheckAllText: "keine",
+		selectedText: "# ausgewählt",
+		noneSelectedText: "Leitung(en) auswählen...",
+		minWidth: 300
+	});
+
+	$("#create-fsa-from").datepicker({ dateFormat: "dd.mm.yy" });
+	$("#create-fsa-until").datepicker({ dateFormat: "dd.mm.yy" });
+	
+	$("#create-fsa-form").dialog({
+		autoOpen: false,
+		height: 580,
+		width: 550,
+		modal: true,
+		buttons: {
+			"Speichern": function() {
+				$(this).dialog("close");
+			},
+			Cancel: function() {
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			// allFields.val("").removeClass( "ui-state-error" );
+		}
+	});
+
+	$("#button-create-fsa")
+		.button()
+		.click(function() {
+			$("#create-fsa-form").dialog("open");
+		}
+	);
 }

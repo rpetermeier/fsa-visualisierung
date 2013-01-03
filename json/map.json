@@ -82,21 +82,21 @@
 			"width" : 80,
 			"height" : 20,
 			"color" : "black",
-			"text": "Deutschland in den Grenzen von 1990"
+			"text": "Die Bundesrepublik Deutschland in den Grenzen von 1990"
 		}, {
 			"x" : 350,
 			"y" : 420,
 			"width" : 80,
 			"height" : 20,
 			"color" : "red",
-			"text": "Deutschland in den Grenzen von 1990"
+			"text": "Die Bundesrepublik Deutschland in den Grenzen von 1990"
 		}, {
 			"x" : 350,
 			"y" : 440,
 			"width" : 80,
 			"height" : 20,
 			"color" : "gold",
-			"text": "Deutschland in den Grenzen von 1990"
+			"text": "Die Bundesrepublik Deutschland in den Grenzen von 1990"
 		}
 	]
 }
