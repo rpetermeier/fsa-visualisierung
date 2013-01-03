@@ -162,7 +162,7 @@
 			"name" : "Kusenhorst",
 			"station1" : 11,
 			"station2" : 12,
-			"disconnected" : false
+			"disconnected" : true
 		}
 	]
 }

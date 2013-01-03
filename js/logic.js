@@ -1,3 +1,4 @@
+var fsa;
 var stations;
 var lines;
 
@@ -6,15 +7,18 @@ function init() {
 }
 
 function draw() {
-	d3.json("json/map.json", function(mapDataJson) {
-		drawMap(mapDataJson);
-		drawFlag(mapDataJson);
-	});
-	d3.json("json/stations-and-lines.json", function(stationAndLineDataJson) {
-		stations = stationAndLineDataJson.stations;
-		lines = stationAndLineDataJson.lines;
-		drawStations(stationAndLineDataJson);
-		drawLines(stationAndLineDataJson);
+	d3.json("json/fsa.json", function(fsaDataJson) {
+		fsa = fsaDataJson;
+		d3.json("json/map.json", function(mapDataJson) {
+			drawMap(mapDataJson);
+			drawFlag(mapDataJson);
+		});
+		d3.json("json/stations-and-lines.json", function(stationAndLineDataJson) {
+			stations = stationAndLineDataJson.stations;
+			lines = stationAndLineDataJson.lines;
+			drawStations(stationAndLineDataJson);
+			drawLines(stationAndLineDataJson);
+		});
 	});
 }
 
@@ -61,7 +65,7 @@ function drawStations(stationAndLineDataJson) {
 		.attr("class", "station")
 		.style("fill", function(d) {
                        var returnColor;
-                       if (d.disconnected) { returnColor = "grey"; }
+                       if (isStationDisconnected(d.id)) { returnColor = "grey"; }
                        else { returnColor = "magenta"; }
                        return returnColor;
                      })
@@ -70,7 +74,6 @@ function drawStations(stationAndLineDataJson) {
 }
 
 function drawLines(stationAndLineDataJson) {
-	// TODO...
 	var svgContainer = d3.select("#map");
 	var lines = svgContainer.selectAll("line.line")
 							.data(stationAndLineDataJson.lines)
@@ -83,7 +86,7 @@ function drawLines(stationAndLineDataJson) {
 		.attr("stroke-width", 2)
 		.attr("stroke", function(d) {
 						var returnColor;
-						if (d.disconnected) { returnColor = "grey"; }
+						if (isLineDisconnected(d.id)) { returnColor = "grey"; }
 						else { returnColor = "magenta"; }
 						return returnColor;
 					})
@@ -101,6 +104,22 @@ function lookupStation(stationId) {
 	}
 	
 	return station;
+}
+
+function isLineDisconnected(lineId) {
+	var disconnected = false;
+	for (var ii = 0; ii < fsa.fsa.length; ++ii) {
+		disconnected |= ($.inArray(lineId, fsa.fsa[ii].lines) != -1);
+	}
+	return disconnected;
+}
+
+function isStationDisconnected(stationId) {
+	var disconnected = false;
+	for (var ii = 0; ii < fsa.fsa.length; ++ii) {
+		disconnected |= ($.inArray(stationId, fsa.fsa[ii].stations) != -1);
+	}
+	return disconnected;
 }
 
 function drawStatic() {

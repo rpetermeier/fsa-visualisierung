@@ -1,0 +1,14 @@
+{
+	"fsa" : [{
+			"stations" : [ 11 ],
+			"lines" : [ 13 ],
+			"fsaId" : "13-0001",
+			"fsaName" : "Kusenhorst"
+		}, {
+			"stations" : [10],
+			"lines" : [],
+			"fsaId" : "13-0002",
+			"fsaName" : "Hattingen"
+		}
+	]
+}
