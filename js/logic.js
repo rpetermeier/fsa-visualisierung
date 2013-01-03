@@ -17,8 +17,8 @@ function draw() {
 			stations = stationAndLineDataJson.stations;
 			lines = stationAndLineDataJson.lines;
 			initCreateFsaDialog(stations, lines);
-			drawStations(stationAndLineDataJson);
 			drawLines(stationAndLineDataJson);
+			drawStations(stationAndLineDataJson);
 		});
 	});
 }
@@ -183,25 +183,20 @@ function findFsaForLine(lineId) {
 	return result;
 }
 
-function drawStatic() {
-	// var svgContainer = d3.select("body").append("svg")
-    //                                .attr("width", 900)
-    //                               .attr("height", 800);
-	var svgContainer = d3.select("#map");
-
-	var line = svgContainer.append("line")
-                        .attr("x1", 50)
-                        .attr("y1", 50)
-                        .attr("x2", 25)
-                        .attr("y2", 10)
-						.attr("stroke-width", 2)
-                        .attr("stroke", "black");
-}
-
 function initCreateFsaDialog(stations, lines) {
+	var stationsSorted = stations.slice();
+	stationsSorted.sort(function(a, b) {
+		return a.name.localeCompare(b.name);
+		// return a < b;
+	});
+	var linesSorted = lines.slice();
+	 linesSorted.sort(function(a, b) {
+	 	return a.name.localeCompare(b.name);
+	});
+	
 	var selectStations = $("#create-fsa-stations");
-	for (var ii = 0; ii < stations.length; ++ii) {
-		selectStations.append('<option value="' + stations[ii].id + '">' + stations[ii].name + '</option>');
+	for (var ii = 0; ii < stationsSorted.length; ++ii) {
+		selectStations.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
 	}
 	selectStations.multiselect({
 		checkAllText: "alle",
@@ -212,8 +207,8 @@ function initCreateFsaDialog(stations, lines) {
 		
 	});
 	var selectLines = $("#create-fsa-lines");
-	for (var ii = 0; ii < lines.length; ++ii) {
-		selectLines.append('<option value="' + lines[ii].id + '">' + lines[ii].name + '</option>');
+	for (var ii = 0; ii < linesSorted.length; ++ii) {
+		selectLines.append('<option value="' + linesSorted[ii].id + '">' + linesSorted[ii].name + '</option>');
 	}
 	selectLines.multiselect({
 		checkAllText: "alle",
@@ -250,4 +245,20 @@ function initCreateFsaDialog(stations, lines) {
 			$("#create-fsa-form").dialog("open");
 		}
 	);
+}
+
+function addFsa(fsa) {
+	// TODO...
+}
+
+function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, dailyOrContinuous) {
+	this.id = id;
+	this.stations = stations;
+	this.lines = lines;
+	this.fsaId = fsaId;
+	this.fsaName = fsaName;
+	this.from = from;
+	this.until = until;
+	this.weekdayProfile = weekdayProfile;
+	this.dailyOrContinuous = dailyOrContinuous;
 }
