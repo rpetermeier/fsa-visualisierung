@@ -6,6 +6,38 @@ function init() {
 	draw();
 }
 
+function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, dailyOrContinuous) {
+	this.id = id;
+	this.stations = stations;
+	this.lines = lines;
+	this.fsaId = fsaId;
+	this.fsaName = fsaName;
+	this.from = from;
+	this.until = until;
+	this.weekdayProfile = weekdayProfile;
+	this.dailyOrContinuous = dailyOrContinuous;
+}
+
+Fsa.prototype.setWeekdayProfile = function(moFr, sa, so) {
+	if (moFr && sa && so) {
+		this.weekdayProfile = "MDMDFSS";
+	} else if (moFr && sa && !so) {
+		this.weekdayProfile = "MDMDFS-";
+	} else if (moFr && !sa && so) {
+		this.weekdayProfile = "MDMDF-S";
+	} else if (!moFr && sa && so) {
+		this.weekdayProfile = "-----SS";
+	} else if (moFr && !sa && !so) {
+		this.weekdayProfile = "MDMDF--";
+	} else if (!moFr && sa && !so) {
+		this.weekdayProfile = "-----S-";
+	} else if (!moFr && !sa && so) {
+		this.weekdayProfile = "------S";
+	} else {
+		this.weekdayProfile = "MDMDF--";
+	}
+}
+
 function draw() {
 	d3.json("json/fsa.json", function(fsaDataJson) {
 		fsa = fsaDataJson;
@@ -228,6 +260,7 @@ function initCreateFsaDialog(stations, lines) {
 		modal: true,
 		buttons: {
 			"Speichern": function() {
+				addFsa();
 				$(this).dialog("close");
 			},
 			Cancel: function() {
@@ -247,18 +280,63 @@ function initCreateFsaDialog(stations, lines) {
 	);
 }
 
-function addFsa(fsa) {
-	// TODO...
+function addFsa() {
+	var newFsa = new Fsa();
+	newFsa.fsaName = $("#create-fsa-fsa-name").val();
+	newFsa.from = $("#create-fsa-from").val();
+	newFsa.until = $("#create-fsa-until").val();
+	newFsa.setWeekdayProfile($('#create-fsa-weekday-profile-mo-fr').is(':checked'),
+		$('#create-fsa-weekday-profile-sa').is(':checked'),
+		$('#create-fsa-weekday-profile-so').is(':checked'));
+	newFsa.dailyOrContinuous = $("#create-fsa-daily-continuous").val();
+	
+	if (fsa.fsa.length > 0) {
+		var nextId = fsa.fsa[fsa.fsa.length - 1].id + 1;
+	} else {
+		var nextId = 1;
+	}
+	newFsa.id = nextId;
+	if (nextId >= 1000) {
+		newFsa.fsaId = "13-" + nextId;
+	} else if (nextId >= 100) {
+		newFsa.fsaId = "13-0" + nextId;
+	} else if (nextId >= 10) {
+		newFsa.fsaId = "13-00" + nextId;
+	} else {
+		newFsa.fsaId = "13-000" + nextId;
+	}
+	newFsa.stations = findStationsById($("#create-fsa-stations").val());
+	newFsa.lines = findLinesById($("#create-fsa-lines").val());
+	
+	// TODO: Update graph...
 }
 
-function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, dailyOrContinuous) {
-	this.id = id;
-	this.stations = stations;
-	this.lines = lines;
-	this.fsaId = fsaId;
-	this.fsaName = fsaName;
-	this.from = from;
-	this.until = until;
-	this.weekdayProfile = weekdayProfile;
-	this.dailyOrContinuous = dailyOrContinuous;
+function findStationsById(stationIds) {
+	var selectedStations = new Array();
+	if (stationIds != null) {
+		for (var ii = 0; ii < stationIds.length; ++ii) {
+			var stationId = parseInt(stationIds[ii]);
+			for (var jj = 0; jj < stations.length; ++jj) {
+				if (stations[jj].id == stationId) {
+					selectedStations.push(stations[jj]);
+				}
+			}
+		}
+	}
+	return selectedStations;
+}
+
+function findLinesById(lineIds) {
+	var selectedLines = new Array();
+	if (lineIds != null) {
+		for (var ii = 0; ii < lineIds.length; ++ii) {
+			var lineId = parseInt(lineIds[ii]);
+			for (var jj = 0; jj < lines.length; ++jj) {
+				if (lines[jj].id == lineId) {
+					selectedLines.push(lines[jj]);
+				}
+			}
+		}
+	}
+	return selectedLines;
 }
