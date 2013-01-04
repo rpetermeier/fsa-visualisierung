@@ -8,6 +8,7 @@
 		this.draw();
 		this.initButtons();
 		this.initCreateStationDialog();
+		this.initCreateLineDialog();
 	};
 
 	this.draw = function() {
@@ -234,6 +235,40 @@
 			}
 		});
 	};
+	
+	this.initCreateLineDialog = function() {
+		$("#create-line-form").dialog({
+			autoOpen: false,
+			height: 330,
+			width: 540,
+			modal: true,
+			buttons: {
+				"Speichern": function() {
+					var name = $.trim($("#create-line-name").val());
+					var error = name.length == 0;
+					if (!error) {
+						try {
+							var numeric = vm.convertStationIds([$("#create-line-station1").val(), $("#create-line-station2").val()]);
+							var stationId1 = numeric[0];
+							var stationId2 = numeric[1];
+							var newLine = new Line(vm.lines[vm.lines.length - 1].id + 1, name, stationId1, stationId2);
+							vm.lines.push(newLine);
+							vm.drawLines(vm.lines);
+							vm.reinitMultiselects(vm.stations, vm.lines);
+							$(this).dialog("close");
+						} catch (exc) {
+							error = true;
+						}
+					}
+				},
+				Cancel: function() {
+					$(this).dialog("close");
+				}
+			},
+			close: function() {
+			}
+		});
+	};
 
 	this.initCreateFsaDialog = function(stations, lines) {
 		var timeWindowFrom = $("#create-fsa-time-window-from");
@@ -281,20 +316,56 @@
 		linesSorted.sort(function(a, b) {
 			return a.name.localeCompare(b.name);
 		});
-		var selectStations = $("#create-fsa-stations");
-		selectStations.empty();
+		var selectStations1 = $("#create-fsa-stations");
+		var selectStations2 = $("#create-line-station1");
+		var selectStations3 = $("#create-line-station2");
+		selectStations1.empty();
+		selectStations2.empty();
+		selectStations3.empty();
 		for (var ii = 0; ii < stationsSorted.length; ++ii) {
-			selectStations.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
+			selectStations1.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
+			selectStations2.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
+			selectStations3.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
 		}
-		selectStations.multiselect({
+		selectStations1.multiselect({
 			checkAllText: "alle",
 			uncheckAllText: "keine",
 			selectedText: "# ausgewählt",
 			noneSelectedText: "Station(en) auswählen...",
 			minWidth: 300
 		});
+		selectStations2.multiselect({
+			checkAllText: "alle",
+			uncheckAllText: "keine",
+			selectedText: function(numChecked, numTotal, checked) {
+				if (checked != null && checked.length == 1) {
+					return $(checked[0]).next().text();
+				} else {
+					return "";
+				}
+			},
+			noneSelectedText: "Station auswählen...",
+			multiple: false,
+			minWidth: 300
+		});
+		selectStations3.multiselect({
+			checkAllText: "alle",
+			uncheckAllText: "keine",
+			selectedText: function(numChecked, numTotal, checked) {
+				if (checked != null && checked.length == 1) {
+					return $(checked[0]).next().text();
+				} else {
+					return "";
+				}
+			},
+			noneSelectedText: "Gegenstation auswählen...",
+			multiple: false,
+			minWidth: 300
+		});
 		// This has to be called to update the list of stations after a new station has been added
 		$("#create-fsa-stations").multiselect("refresh");
+		$("#create-line-station1").multiselect("refresh");
+		$("#create-line-station2").multiselect("refresh");
 		
 		var selectLines = $("#create-fsa-lines");
 		selectLines.empty();
@@ -328,10 +399,7 @@
 		$("#button-create-line")
 			.button()
 			.click(function() {
-				var newLine = new Line(lines[lines.length - 1].id + 1, "Verbindung", stations[stations.length - 2].id, stations[stations.length - 1].id);
-				lines.push(newLine);
-				drawLines(lines);
-				reinitMultiselects(stations, lines);
+				$("#create-line-form").dialog("open");
 			}
 		);
 	};

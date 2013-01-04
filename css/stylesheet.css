@@ -1,7 +1,11 @@
 /* Necessary for alignment of labels with input fields */
-.filter-area label, .filter-area input {
+.input-form label, .filter-area input {
   display: inline-block;
 }
-.filter-area label {
+.input-form label {
   width: 120px;
+}
+
+#create-line-name {
+	width: 300px;
 }

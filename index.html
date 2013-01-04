@@ -43,7 +43,7 @@
 </p>
 <div id="create-fsa-form" title="Neuer FSA">
 	<form>
-	<fieldset class="filter-area">
+	<fieldset class="input-form">
 		<p><label for="create-fsa-fsa-name">FSA-Name: </label>
 		<input type="text" id="create-fsa-fsa-name" name="create-fsa-fsa-name"></input></p>
 		<p><label for="create-fsa-from">Von: </label>
@@ -80,13 +80,30 @@
 
 <div id="create-station-form" title="Neue Station">
 	<form>
-	<fieldset class="filter-area">
+	<fieldset class="input-form">
 		<p><label for="create-station-name">Name: </label>
 		<input type="text" id="create-station-name" name="create-station-name"></input></p>
 		<p><label for="create-station-x">X: </label>
 		<input type="text" id="create-station-x" name="create-station-x"></input></p>
 		<p><label for="create-station-y">Y: </label>
 		<input type="text" id="create-station-y" name="create-station-y"></input></p>
+		</p>
+	</fieldset>
+	</form>
+</div>
+
+<div id="create-line-form" title="Neue Leitung">
+	<form>
+	<fieldset class="input-form">
+		<p><label for="create-line-name">Name: </label>
+		<input type="text" id="create-line-name" name="create-line-name"></input></p>
+		<p><label for="create-line-station1">Station: </label>
+		<select id="create-line-station1" name="create-line-station1" multiple="multiple">
+		</select>
+		</p>
+		<p><label for="create-line-station2">Gegenstation: </label>
+		<select id="create-line-station2" name="create-line-station2" multiple="multiple">
+		</select>
 		</p>
 	</fieldset>
 	</form>
