@@ -4,6 +4,7 @@ var lines;
 
 function init() {
 	draw();
+	initButtons();
 }
 
 function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, timeWindow, dailyOrContinuous) {
@@ -246,15 +247,6 @@ function findFsaForLine(lineId) {
 }
 
 function initCreateFsaDialog(stations, lines) {
-	var stationsSorted = stations.slice();
-	stationsSorted.sort(function(a, b) {
-		return a.name.localeCompare(b.name);
-		// return a < b;
-	});
-	var linesSorted = lines.slice();
-	 linesSorted.sort(function(a, b) {
-	 	return a.name.localeCompare(b.name);
-	});
 	var timeWindowFrom = $("#create-fsa-time-window-from");
 	var timeWindowUntil = $("#create-fsa-time-window-until");
 	for (var ii = 0; ii < 24; ++ii) {
@@ -264,37 +256,11 @@ function initCreateFsaDialog(stations, lines) {
 	}
 	timeWindowFrom.val("07");
 	timeWindowUntil.val("17");
-	
-	var selectStations = $("#create-fsa-stations");
-	selectStations.empty();
-	for (var ii = 0; ii < stationsSorted.length; ++ii) {
-		selectStations.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
-	}
-	selectStations.multiselect({
-		checkAllText: "alle",
-		uncheckAllText: "keine",
-		selectedText: "# ausgewählt",
-		noneSelectedText: "Station(en) auswählen...",
-		minWidth: 300
-	});
-	$("#create-fsa-stations").multiselect("refresh");
-	
-	var selectLines = $("#create-fsa-lines");
-	selectLines.empty();
-	for (var ii = 0; ii < linesSorted.length; ++ii) {
-		selectLines.append('<option value="' + linesSorted[ii].id + '">' + linesSorted[ii].name + '</option>');
-	}
-	selectLines.multiselect({
-		checkAllText: "alle",
-		uncheckAllText: "keine",
-		selectedText: "# ausgewählt",
-		noneSelectedText: "Leitung(en) auswählen...",
-		minWidth: 300
-	});
-	$("#create-fsa-lines").multiselect("refresh");
 
 	$("#create-fsa-from").datepicker({ dateFormat: "dd.mm.yy" });
 	$("#create-fsa-until").datepicker({ dateFormat: "dd.mm.yy" });
+	
+	reinitMultiselects(stations, lines);
 	
 	$("#create-fsa-form").dialog({
 		autoOpen: false,
@@ -314,7 +280,50 @@ function initCreateFsaDialog(stations, lines) {
 			// allFields.val("").removeClass( "ui-state-error" );
 		}
 	});
+}
+
+function reinitMultiselects(stations, lines) {
+	var stationsSorted = stations.slice();
+	stationsSorted.sort(function(a, b) {
+		return a.name.localeCompare(b.name);
+		// return a < b;
+	});
+	var linesSorted = lines.slice();
+	 linesSorted.sort(function(a, b) {
+	 	return a.name.localeCompare(b.name);
+	});
+	var selectStations = $("#create-fsa-stations");
+	selectStations.empty();
+	for (var ii = 0; ii < stationsSorted.length; ++ii) {
+		selectStations.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
+	}
+	selectStations.multiselect({
+		checkAllText: "alle",
+		uncheckAllText: "keine",
+		selectedText: "# ausgewählt",
+		noneSelectedText: "Station(en) auswählen...",
+		minWidth: 300
+	});
+	// This has to be called to update the list of stations after a new station has been added
+	$("#create-fsa-stations").multiselect("refresh");
 	
+	var selectLines = $("#create-fsa-lines");
+	selectLines.empty();
+	for (var ii = 0; ii < linesSorted.length; ++ii) {
+		selectLines.append('<option value="' + linesSorted[ii].id + '">' + linesSorted[ii].name + '</option>');
+	}
+	selectLines.multiselect({
+		checkAllText: "alle",
+		uncheckAllText: "keine",
+		selectedText: "# ausgewählt",
+		noneSelectedText: "Leitung(en) auswählen...",
+		minWidth: 300
+	});
+	// This has to be called to update the list of lines after a new line has been added
+	$("#create-fsa-lines").multiselect("refresh");
+}
+
+function initButtons() {
 	$("#button-create-fsa")
 		.button()
 		.click(function() {
@@ -327,7 +336,7 @@ function initCreateFsaDialog(stations, lines) {
 			var newStation = new Station(stations[stations.length - 1].id + 1, "Zentrum", 500, 800);
 			stations.push(newStation);
 			drawStations(stations);
-			initCreateFsaDialog(stations, lines);
+			reinitMultiselects(stations, lines);
 		}
 	);
 	$("#button-create-line")
@@ -336,7 +345,7 @@ function initCreateFsaDialog(stations, lines) {
 			var newLine = new Line(lines[lines.length - 1].id + 1, "Verbindung", stations[stations.length - 2].id, stations[stations.length - 1].id);
 			lines.push(newLine);
 			drawLines(lines);
-			initCreateFsaDialog(stations, lines);
+			reinitMultiselects(stations, lines);
 		}
 	);
 }
@@ -367,7 +376,7 @@ function addFsa() {
 	} else {
 		newFsa.fsaId = "13-000" + nextId;
 	}
-	newFsa.stations = convertStationsIds($("#create-fsa-stations").val());
+	newFsa.stations = convertStationIds($("#create-fsa-stations").val());
 	newFsa.lines = convertLineIds($("#create-fsa-lines").val());
 	
 	fsa.fsa.push(newFsa);
@@ -397,7 +406,7 @@ function addFsa() {
 	}
 }
 
-function convertStationsIds(stationIds) {
+function convertStationIds(stationIds) {
 	var selectedStations = new Array();
 	if (stationIds != null) {
 		for (var ii = 0; ii < stationIds.length; ++ii) {
