@@ -266,6 +266,7 @@ function initCreateFsaDialog(stations, lines) {
 	timeWindowUntil.val("17");
 	
 	var selectStations = $("#create-fsa-stations");
+	selectStations.empty();
 	for (var ii = 0; ii < stationsSorted.length; ++ii) {
 		selectStations.append('<option value="' + stationsSorted[ii].id + '">' + stationsSorted[ii].name + '</option>');
 	}
@@ -276,7 +277,10 @@ function initCreateFsaDialog(stations, lines) {
 		noneSelectedText: "Station(en) auswählen...",
 		minWidth: 300
 	});
+	$("#create-fsa-stations").multiselect("refresh");
+	
 	var selectLines = $("#create-fsa-lines");
+	selectLines.empty();
 	for (var ii = 0; ii < linesSorted.length; ++ii) {
 		selectLines.append('<option value="' + linesSorted[ii].id + '">' + linesSorted[ii].name + '</option>');
 	}
@@ -287,6 +291,7 @@ function initCreateFsaDialog(stations, lines) {
 		noneSelectedText: "Leitung(en) auswählen...",
 		minWidth: 300
 	});
+	$("#create-fsa-lines").multiselect("refresh");
 
 	$("#create-fsa-from").datepicker({ dateFormat: "dd.mm.yy" });
 	$("#create-fsa-until").datepicker({ dateFormat: "dd.mm.yy" });
@@ -309,11 +314,29 @@ function initCreateFsaDialog(stations, lines) {
 			// allFields.val("").removeClass( "ui-state-error" );
 		}
 	});
-
+	
 	$("#button-create-fsa")
 		.button()
 		.click(function() {
 			$("#create-fsa-form").dialog("open");
+		}
+	);
+	$("#button-create-station")
+		.button()
+		.click(function() {
+			var newStation = new Station(stations[stations.length - 1].id + 1, "Zentrum", 500, 800);
+			stations.push(newStation);
+			drawStations(stations);
+			initCreateFsaDialog(stations, lines);
+		}
+	);
+	$("#button-create-line")
+		.button()
+		.click(function() {
+			var newLine = new Line(lines[lines.length - 1].id + 1, "Verbindung", stations[stations.length - 2].id, stations[stations.length - 1].id);
+			lines.push(newLine);
+			drawLines(lines);
+			initCreateFsaDialog(stations, lines);
 		}
 	);
 }
