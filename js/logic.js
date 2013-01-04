@@ -206,7 +206,7 @@
 	this.initCreateStationDialog = function() {
 		$("#create-station-form").dialog({
 			autoOpen: false,
-			height: 300,
+			height: 320,
 			width: 450,
 			modal: true,
 			buttons: {
