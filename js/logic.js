@@ -39,6 +39,20 @@ Fsa.prototype.setWeekdayProfile = function(moFr, sa, so) {
 	}
 }
 
+function Station(id, name, x, y) {
+	this.id = id;
+	this.name = name;
+	this.x = x;
+	this.y = y;
+}
+
+function Line(id, name, station1, station2) {
+	this.id = id;
+	this.name = name;
+	this.station1 = station1;
+	this.station2 = station2;
+}
+
 function draw() {
 	d3.json("json/fsa.json", function(fsaDataJson) {
 		fsa = fsaDataJson;
@@ -95,7 +109,7 @@ function drawFlag(mapDataJson) {
 	});
 }
 
-function drawStations(stations, doTransition) {
+function drawStations(stations) {
 	var svgContainer = d3.select("#map");
 	var stationSymbols = svgContainer.selectAll("circle.station")
 							.data(stations)
@@ -105,11 +119,8 @@ function drawStations(stations, doTransition) {
 		.attr("cy", function(d) { return d.y; })
 		.attr("r", function(d) { return 5; })
 		.attr("class", "station");
-	if (doTransition) {
-		stationSymbols.transition().duration(500).delay(0).style("fill", colorForStation);
-	} else {
-		stationSymbols.style("fill", colorForStation);
-	}
+	stationSymbols.style("fill", colorForStation);
+
 	$('svg circle.station').tipsy({
         gravity: 'w', 
         html: true, 
