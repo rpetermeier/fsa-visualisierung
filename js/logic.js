@@ -105,13 +105,7 @@ function drawStations(stationAndLineDataJson) {
 		.attr("cy", function(d) { return d.y; })
 		.attr("r", function(d) { return 5; })
 		.attr("class", "station")
-		.style("fill", function(d) {
-                       var returnColor;
-                       if (isStationDisconnected(d.id)) { returnColor = "grey"; }
-                       else { returnColor = "magenta"; }
-                       return returnColor;
-                     })
-		.append("svg:title");
+		.style("fill", colorForStation);
 	$('svg circle.station').tipsy({
         gravity: 'w', 
         html: true, 
@@ -154,12 +148,7 @@ function drawLines(stationAndLineDataJson) {
 		.attr("x2", function(d) { return lookupStation(d.station2).x; })
 		.attr("y2", function(d) { return lookupStation(d.station2).y; })
 		.attr("stroke-width", 2)
-		.attr("stroke", function(d) {
-						var returnColor;
-						if (isLineDisconnected(d.id)) { returnColor = "grey"; }
-						else { returnColor = "magenta"; }
-						return returnColor;
-					})
+		.attr("stroke", colorForLine)
 		.attr("class", "line")
 		.append("svg:title");
 		// .text(function(d) { return d.name; });
@@ -178,6 +167,20 @@ function drawLines(stationAndLineDataJson) {
     });
 }
 
+function colorForLine(line) {
+	var returnColor;
+	if (isLineDisconnected(line.id)) { returnColor = "grey"; }
+	else { returnColor = "magenta"; }
+	return returnColor;
+}
+
+function colorForStation(station) {
+	var returnColor;
+	if (isStationDisconnected(station.id)) { returnColor = "grey"; }
+	else { returnColor = "magenta"; }
+	return returnColor;
+}
+
 function lookupStation(stationId) {
 	var station = null;
 	for (var ii = 0; ii < stations.length; ++ii) {
@@ -185,8 +188,17 @@ function lookupStation(stationId) {
 			station = stations[ii];
 		}
 	}
-	
 	return station;
+}
+
+function lookupLine(lineId) {
+	var line = null;
+	for (var ii = 0; ii < lines.length; ++ii) {
+		if (lines[ii] != null && lines[ii].id  == lineId) {
+			line = lines[ii];
+		}
+	}
+	return line;
 }
 
 function isLineDisconnected(lineId) {
@@ -213,6 +225,7 @@ function findFsaForLine(lineId) {
 		if ($.inArray(lineId, fsa.fsa[ii].lines) != -1) {
 			result.push(fsa.fsa[ii]);
 		}
+
 	}
 	return result;
 }
@@ -316,39 +329,55 @@ function addFsa() {
 	} else {
 		newFsa.fsaId = "13-000" + nextId;
 	}
-	newFsa.stations = findStationsById($("#create-fsa-stations").val());
-	newFsa.lines = findLinesById($("#create-fsa-lines").val());
+	newFsa.stations = convertStationsIds($("#create-fsa-stations").val());
+	newFsa.lines = convertLineIds($("#create-fsa-lines").val());
 	
 	fsa.fsa.push(newFsa);
 	
-	// TODO: Update graph...
+	// Update graph...
+	for (var ii = 0; ii < newFsa.stations.length; ++ii) {
+		var station = lookupStation(newFsa.stations[ii]);
+		d3.selectAll("circle.station").filter(function(d, i) {
+			if (newFsa.stations[ii].id == d.id) {
+				return this;
+			} else {
+				return null;
+			}
+		})
+		.data([ station ]);
+		// .style("fill", colorForStation);
+	}
+	for (var ii = 0; ii < newFsa.lines.length; ++ii) {
+		var line = lookupLine(newFsa.lines[ii]);
+		d3.selectAll("line.line").filter(function(d, i) {
+			if (newFsa.lines[ii].id == d.id) {
+				return this;
+			} else {
+				return null;
+			}
+		})
+		.data([ line ]);
+		// .style("fill", colorForLine);
+	}
 }
 
-function findStationsById(stationIds) {
+function convertStationsIds(stationIds) {
 	var selectedStations = new Array();
 	if (stationIds != null) {
 		for (var ii = 0; ii < stationIds.length; ++ii) {
 			var stationId = parseInt(stationIds[ii]);
-			for (var jj = 0; jj < stations.length; ++jj) {
-				if (stations[jj].id == stationId) {
-					selectedStations.push(stations[jj]);
-				}
-			}
+			selectedStations.push(stationId);
 		}
 	}
 	return selectedStations;
 }
 
-function findLinesById(lineIds) {
+function convertLineIds(lineIds) {
 	var selectedLines = new Array();
 	if (lineIds != null) {
 		for (var ii = 0; ii < lineIds.length; ++ii) {
 			var lineId = parseInt(lineIds[ii]);
-			for (var jj = 0; jj < lines.length; ++jj) {
-				if (lines[jj].id == lineId) {
-					selectedLines.push(lines[jj]);
-				}
-			}
+			selectedLines.push(lineId);
 		}
 	}
 	return selectedLines;
