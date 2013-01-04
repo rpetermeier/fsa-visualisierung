@@ -1,0 +1,26 @@
+﻿{
+	"fsa" : [{
+			"id": 1,
+			"stations" : [ 11 ],
+			"lines" : [ 13 ],
+			"fsaId" : "13-0001",
+			"fsaName" : "Kusenhorst",
+			"from": "01.01.2013",
+			"until": "31.01.2013",
+			"weekdayProfile": "MDMDF--",
+			"timeWindow": "07-17",
+			"dailyOrContinuous": "tgl"
+		}, {
+			"id": 2,
+			"stations" : [10],
+			"lines" : [],
+			"fsaId" : "13-0002",
+			"fsaName" : "Hattingen",
+			"from": "01.01.2013",
+			"until": "23.05.2013",
+			"weekdayProfile": "MDMDFSS",
+			"timeWindow": "10-19",
+			"dailyOrContinuous": "dgh"
+		}
+	]
+}

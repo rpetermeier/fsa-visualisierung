@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8" />
+<html>
+	<head>
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		
+		<link type="text/css" href="js/jquery-ui-1.9.2.custom/css/smoothness/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+		<link type="text/css" href="js/jquery.tipsy/tipsy.css" rel="stylesheet" />
+		<link type="text/css" href="js/jquery.multiselect/jquery.multiselect.css" rel="stylesheet" />
+		<link type="text/css" href="css/stylesheet.css" rel="stylesheet" />
+				
+		<script src="js/D3.js/d3.v3.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+		<script type="text/javascript" src="js/jquery.tipsy/jquery.tipsy.js"></script>
+		<script type="text/javascript" src="js/jquery.multiselect/jquery.multiselect.js"></script>
+		<script type="text/javascript" src="js/logic.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				init();
+			});
+		</script>
+		<style>
+		.node {
+		  stroke: #fff;
+		  stroke-width: 1.5px;
+		}
+
+		.link {
+		  stroke: #999;
+		  stroke-opacity: .6;
+		}
+		</style>
+	</head>
+<body>
+
+<svg width="1000" height="860" id="map" />
+
+<p>
+<button id="button-create-fsa">Neuer FSA...</button><button id="button-create-station">Neue Station...</button><button id="button-create-line">Neue Leitung...</button>
+</p>
+<div id="create-fsa-form" title="Neuer FSA">
+	<form>
+	<fieldset class="input-form">
+		<p><label for="create-fsa-fsa-name">FSA-Name: </label>
+		<input type="text" id="create-fsa-fsa-name" name="create-fsa-fsa-name"></input></p>
+		<p><label for="create-fsa-from">Von: </label>
+		<input type="text" id="create-fsa-from" name="create-fsa-from" ></input></p>
+		<p><label for="create-fsa-until">Bis: </label>
+		<input type="text" id="create-fsa-until" name="create-fsa-until"></input></p>
+		<p><input type="checkbox" id="create-fsa-weekday-profile-mo-fr" name="create-fsa-weekday-profile-mo-fr"></input><label for="create-fsa-weekday-profile-mo-fr">Mo-Fr</label></p>
+		<p><input type="checkbox" id="create-fsa-weekday-profile-sa" name="create-fsa-weekday-profile-sa"></input><label for="create-fsa-weekday-profile-sa">Sa</label></p>
+		<p><input type="checkbox" id="create-fsa-weekday-profile-so" name="create-fsa-weekday-profile-so"></input><label for="create-fsa-weekday-profile-so">So</label></p>
+		<p>
+		<label for="create-fsa-daily-continuous">tgl/dgh: </label>
+		<select id="create-fsa-daily-continuous" name="create-fsa-daily-continuous">
+			<option value="tgl">tgl</option>
+			<option value="dgh">dgh</option>
+		</select>
+		</p>
+		<p>
+		<label for="create-fsa-time-window-from">Zeitfenster: </label>
+		<select id="create-fsa-time-window-from" name="create-fsa-time-window-from"></select>
+		&nbsp;-&nbsp;
+		<select id="create-fsa-time-window-until" name="create-fsa-time-window-until"></select>
+		</p>
+		<p><label for="create-fsa-stations">Station(en): </label>
+		<select id="create-fsa-stations" name="create-fsa-stations" multiple="multiple">
+		</select>
+		</p>
+		<p><label for="create-fsa-lines">Leitung(en): </label>
+		<select id="create-fsa-lines" name="create-fsa-lines" multiple="multiple">
+		</select>
+		</p>
+	</fieldset>
+	</form>
+</div>
+
+<div id="create-station-form" title="Neue Station">
+	<form>
+	<fieldset class="input-form">
+		<p><label for="create-station-name">Name: </label>
+		<input type="text" id="create-station-name" name="create-station-name"></input></p>
+		<p><label for="create-station-x">X: </label>
+		<input type="text" id="create-station-x" name="create-station-x"></input></p>
+		<p><label for="create-station-y">Y: </label>
+		<input type="text" id="create-station-y" name="create-station-y"></input></p>
+		</p>
+	</fieldset>
+	</form>
+</div>
+
+<div id="create-line-form" title="Neue Leitung">
+	<form>
+	<fieldset class="input-form">
+		<p><label for="create-line-name">Name: </label>
+		<input type="text" id="create-line-name" name="create-line-name"></input></p>
+		<p><label for="create-line-station1">Station: </label>
+		<select id="create-line-station1" name="create-line-station1" multiple="multiple">
+		</select>
+		</p>
+		<p><label for="create-line-station2">Gegenstation: </label>
+		<select id="create-line-station2" name="create-line-station2" multiple="multiple">
+		</select>
+		</p>
+	</fieldset>
+	</form>
+</div>
+
+</body>
+</html>
