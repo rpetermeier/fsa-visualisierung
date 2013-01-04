@@ -50,8 +50,8 @@ function draw() {
 			stations = stationAndLineDataJson.stations;
 			lines = stationAndLineDataJson.lines;
 			initCreateFsaDialog(stations, lines);
-			drawLines(stationAndLineDataJson);
-			drawStations(stationAndLineDataJson);
+			drawLines(stationAndLineDataJson.lines);
+			drawStations(stationAndLineDataJson.stations, false);
 		});
 	});
 }
@@ -95,17 +95,21 @@ function drawFlag(mapDataJson) {
 	});
 }
 
-function drawStations(stationAndLineDataJson) {
+function drawStations(stations, doTransition) {
 	var svgContainer = d3.select("#map");
-	var stations = svgContainer.selectAll("circle.station")
-							.data(stationAndLineDataJson.stations)
+	var stationSymbols = svgContainer.selectAll("circle.station")
+							.data(stations)
 							.enter()
 							.append("circle");
-	stations.attr("cx", function(d) { return d.x })
+	stationSymbols.attr("cx", function(d) { return d.x })
 		.attr("cy", function(d) { return d.y; })
 		.attr("r", function(d) { return 5; })
-		.attr("class", "station")
-		.style("fill", colorForStation);
+		.attr("class", "station");
+	if (doTransition) {
+		stationSymbols.transition().duration(500).delay(0).style("fill", colorForStation);
+	} else {
+		stationSymbols.style("fill", colorForStation);
+	}
 	$('svg circle.station').tipsy({
         gravity: 'w', 
         html: true, 
@@ -137,13 +141,13 @@ function formatFsaInfo(relevantFsa) {
 	return info;
 }
 
-function drawLines(stationAndLineDataJson) {
+function drawLines(lines) {
 	var svgContainer = d3.select("#map");
-	var lines = svgContainer.selectAll("line.line")
-							.data(stationAndLineDataJson.lines)
+	var lineSymbols = svgContainer.selectAll("line.line")
+							.data(lines)
 							.enter()
 							.append("line");
-	lines.attr("x1", function(d) { return lookupStation(d.station1).x; })
+	lineSymbols.attr("x1", function(d) { return lookupStation(d.station1).x; })
 		.attr("y1", function(d) { return lookupStation(d.station1).y; })
 		.attr("x2", function(d) { return lookupStation(d.station2).x; })
 		.attr("y2", function(d) { return lookupStation(d.station2).y; })
@@ -337,27 +341,25 @@ function addFsa() {
 	// Update graph...
 	for (var ii = 0; ii < newFsa.stations.length; ++ii) {
 		var station = lookupStation(newFsa.stations[ii]);
-		d3.selectAll("circle.station").filter(function(d, i) {
-			if (newFsa.stations[ii].id == d.id) {
+		var sel = d3.selectAll("circle.station").filter(function(d, i) {
+			if (station.id == d.id) {
 				return this;
 			} else {
 				return null;
 			}
-		})
-		.data([ station ]);
-		// .style("fill", colorForStation);
+		});
+		sel.transition().duration(1000).delay(0).style("fill", colorForStation);
 	}
 	for (var ii = 0; ii < newFsa.lines.length; ++ii) {
 		var line = lookupLine(newFsa.lines[ii]);
-		d3.selectAll("line.line").filter(function(d, i) {
-			if (newFsa.lines[ii].id == d.id) {
+		var sel = d3.selectAll("line.line").filter(function(d, i) {
+			if (line.id == d.id) {
 				return this;
 			} else {
 				return null;
 			}
-		})
-		.data([ line ]);
-		// .style("fill", colorForLine);
+		});
+		sel.transition().duration(1000).delay(0).attr("stroke", colorForLine);
 	}
 }
 
