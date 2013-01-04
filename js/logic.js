@@ -6,7 +6,7 @@ function init() {
 	draw();
 }
 
-function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, dailyOrContinuous) {
+function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, timeWindow, dailyOrContinuous) {
 	this.id = id;
 	this.stations = stations;
 	this.lines = lines;
@@ -15,6 +15,7 @@ function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, d
 	this.from = from;
 	this.until = until;
 	this.weekdayProfile = weekdayProfile;
+	this.timeWindow = timeWindow;
 	this.dailyOrContinuous = dailyOrContinuous;
 }
 
@@ -134,6 +135,7 @@ function formatFsaInfo(relevantFsa) {
 		info += ("<li>" + relevantFsa[ii].fsaId + " (" + relevantFsa[ii].fsaName + ")<br />");
 		info += relevantFsa[ii].from + " - " + relevantFsa[ii].until + "<br />";
 		info += relevantFsa[ii].weekdayProfile + "<br />";
+		info += relevantFsa[ii].timeWindow + "<br />";
 		info += relevantFsa[ii].dailyOrContinuous;
 		info += "</li>";
 	}
@@ -225,6 +227,15 @@ function initCreateFsaDialog(stations, lines) {
 	 linesSorted.sort(function(a, b) {
 	 	return a.name.localeCompare(b.name);
 	});
+	var timeWindowFrom = $("#create-fsa-time-window-from");
+	var timeWindowUntil = $("#create-fsa-time-window-until");
+	for (var ii = 0; ii < 24; ++ii) {
+		var val = ii < 10 ? "0" + ii : "" + ii;
+		timeWindowFrom.append('<option value="' + val + '">' + val + '</option>');
+		timeWindowUntil.append('<option value="' + val + '">' + val + '</option>');
+	}
+	timeWindowFrom.val("07");
+	timeWindowUntil.val("17");
 	
 	var selectStations = $("#create-fsa-stations");
 	for (var ii = 0; ii < stationsSorted.length; ++ii) {
@@ -236,7 +247,6 @@ function initCreateFsaDialog(stations, lines) {
 		selectedText: "# ausgewählt",
 		noneSelectedText: "Station(en) auswählen...",
 		minWidth: 300
-		
 	});
 	var selectLines = $("#create-fsa-lines");
 	for (var ii = 0; ii < linesSorted.length; ++ii) {
@@ -255,7 +265,7 @@ function initCreateFsaDialog(stations, lines) {
 	
 	$("#create-fsa-form").dialog({
 		autoOpen: false,
-		height: 580,
+		height: 620,
 		width: 550,
 		modal: true,
 		buttons: {
@@ -289,6 +299,7 @@ function addFsa() {
 		$('#create-fsa-weekday-profile-sa').is(':checked'),
 		$('#create-fsa-weekday-profile-so').is(':checked'));
 	newFsa.dailyOrContinuous = $("#create-fsa-daily-continuous").val();
+	newFsa.timeWindow = $("#create-fsa-time-window-from").val() + "-" + $("#create-fsa-time-window-until").val();
 	
 	if (fsa.fsa.length > 0) {
 		var nextId = fsa.fsa[fsa.fsa.length - 1].id + 1;
