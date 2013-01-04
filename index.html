@@ -39,7 +39,7 @@
 <svg width="1000" height="860" id="map" />
 
 <p>
-<button id="button-create-fsa">Neuer FSA...</button><button id="button-create-station">Neue Station</button><button id="button-create-line">Neue Leitung</button>
+<button id="button-create-fsa">Neuer FSA...</button><button id="button-create-station">Neue Station...</button><button id="button-create-line">Neue Leitung...</button>
 </p>
 <div id="create-fsa-form" title="Neuer FSA">
 	<form>
@@ -73,6 +73,20 @@
 		<p><label for="create-fsa-lines">Leitung(en): </label>
 		<select id="create-fsa-lines" name="create-fsa-lines" multiple="multiple">
 		</select>
+		</p>
+	</fieldset>
+	</form>
+</div>
+
+<div id="create-station-form" title="Neue Station">
+	<form>
+	<fieldset class="filter-area">
+		<p><label for="create-station-name">Name: </label>
+		<input type="text" id="create-station-name" /></p>
+		<p><label for="create-station-x">X: </label>
+		<input type="text" id="create-station-x" /></p>
+		<p><label for="create-station-y">Y: </label>
+		<input type="text" id="create-station-y" /></p>
 		</p>
 	</fieldset>
 	</form>

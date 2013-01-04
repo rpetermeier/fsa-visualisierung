@@ -5,6 +5,7 @@ var lines;
 function init() {
 	draw();
 	initButtons();
+	initCreateStationDialog();
 }
 
 function Fsa(id, stations, lines, fsaId, fsaName, from, until, weekdayProfile, timeWindow, dailyOrContinuous) {
@@ -246,6 +247,39 @@ function findFsaForLine(lineId) {
 	return result;
 }
 
+function initCreateStationDialog() {
+	$("#create-station-form").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 450,
+		modal: true,
+		buttons: {
+			"Speichern": function() {
+				var name = $.trim($("#create-station-name").val());
+				var error = name.length == 0;
+				if (!error) {
+					try {
+						var x = parseInt($("#create-station-x").val());
+						var y = parseInt($("#create-station-y").val());
+						var newStation = new Station(stations[stations.length - 1].id + 1, name, x, y);
+						stations.push(newStation);
+						drawStations(stations);
+						reinitMultiselects(stations, lines);
+						$(this).dialog("close");
+					} catch (exc) {
+						error = true;
+					}
+				}
+			},
+			Cancel: function() {
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+		}
+	});
+}
+
 function initCreateFsaDialog(stations, lines) {
 	var timeWindowFrom = $("#create-fsa-time-window-from");
 	var timeWindowUntil = $("#create-fsa-time-window-until");
@@ -333,10 +367,7 @@ function initButtons() {
 	$("#button-create-station")
 		.button()
 		.click(function() {
-			var newStation = new Station(stations[stations.length - 1].id + 1, "Zentrum", 500, 800);
-			stations.push(newStation);
-			drawStations(stations);
-			reinitMultiselects(stations, lines);
+			$("#create-station-form").dialog("open");
 		}
 	);
 	$("#button-create-line")
