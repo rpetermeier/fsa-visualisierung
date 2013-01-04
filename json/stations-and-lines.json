@@ -27,17 +27,17 @@
 		}, {
 			"id" : 6,
 			"name" : "Eiberg",
-			"x" : 140,
-			"y" : 340
+			"x" : 120,
+			"y" : 360
 		}, {
 			"id" : 7,
 			"name" : "Karnap",
 			"x" : 120,
-			"y" : 360
+			"y" : 335
 		}, {
 			"id" : 8,
 			"name" : "Scholven",
-			"x" : 110,
+			"x" : 140,
 			"y" : 340
 		}, {
 			"id" : 9,
@@ -138,6 +138,12 @@
 			"name" : "Kusenhorst",
 			"station1" : 11,
 			"station2" : 12
+		},
+		{
+			"id" : 14,
+			"name" : "Buer Süd",
+			"station1" : 2,
+			"station2" : 9
 		}
 	]
 }
