@@ -402,6 +402,13 @@
 				$("#create-line-form").dialog("open");
 			}
 		);
+		$("#button-zhongguo")
+			.button()
+			.click(function() {
+				vm.zhongguo();
+				$(this).remove();
+			}
+		);
 	};
 
 	this.addFsa = function() {
@@ -480,6 +487,49 @@
 			}
 		}
 		return selectedLines;
+	};
+	
+	this.zhongguo = function() {
+		d3.json("json/chinese-cities-formatted.json", function(chineseCitiesJson) {
+			// alert("中国!");
+			var numStations = 30 + Math.floor(Math.random() * 10);
+			var selected = new Array();
+			for (var ii = 0; ii < numStations; ++ii) {
+				var index = Math.floor(Math.random() * chineseCitiesJson.length);
+				if ($.inArray(index, selected) == -1) {
+					selected.push(index);
+					var x = 100 + Math.floor(Math.random() * 250);
+					var y = 100 + Math.floor(Math.random() * 600);
+					vm.stations.push(
+						new Station(vm.stations[vm.stations.length - 1].id + 1, 
+							chineseCitiesJson[index].name_european + " (" + chineseCitiesJson[index].name_simplified + ")", 
+							x, 
+							y));
+				}
+			}
+			vm.drawStations(vm.stations);
+			var numLines = 50 + Math.floor(Math.random() * 10);
+			var pairs = new Array();
+			for (var ii = 0; ii < numLines; ++ii) {
+				var index1 = Math.floor(Math.random() * vm.stations.length);
+				var index2 = Math.floor(Math.random() * vm.stations.length);
+				if (index1 != index2) {
+					var dupe = false;
+					for (var jj = 0; jj < pairs.length; ++jj) {
+						if (pairs[jj][0] == index1 && pairs[jj][1] == index2
+							|| pairs[jj][0] == index2 && pairs[jj][1] == index1) {
+							dupe = true;
+						}
+					}
+					if (!dupe) {
+						pairs.push([ index1, index2 ]);
+						vm.lines.push(new Line(vm.lines[vm.lines.length - 1].id + 1, vm.stations[index1].name + " --- " + vm.stations[index2].name, vm.stations[index1].id, vm.stations[index2].id));
+					}
+				}
+			}
+			vm.drawLines(vm.lines);
+			vm.reinitMultiselects(vm.stations, vm.lines);
+		});
 	};
 }
 
