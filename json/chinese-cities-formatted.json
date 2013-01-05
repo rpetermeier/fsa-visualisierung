@@ -1,0 +1,482 @@
+[{
+		"json_class" : "ChineseCity",
+		"name_european" : "Chongqing",
+		"name_pinyin" : "Chóngqìng",
+		"name_simplified" : "重庆",
+		"name_traditional" : "重慶"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shanghai",
+		"name_pinyin" : "Shànghǎi",
+		"name_simplified" : "上海",
+		"name_traditional" : "上海"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Beijing",
+		"name_pinyin" : "Běijīng",
+		"name_simplified" : "北京",
+		"name_traditional" : "北京"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Chengdu",
+		"name_pinyin" : "Chéngdū",
+		"name_simplified" : "成都",
+		"name_traditional" : "成都"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Tianjin",
+		"name_pinyin" : "Tiānjīn",
+		"name_simplified" : "天津",
+		"name_traditional" : "天津"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Guangzhou",
+		"name_pinyin" : "Guǎngzhōu",
+		"name_simplified" : "广州",
+		"name_traditional" : "廣州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Harbin",
+		"name_pinyin" : "Hā'ěrbīn",
+		"name_simplified" : "哈尔滨",
+		"name_traditional" : "哈爾濱"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shenzhen",
+		"name_pinyin" : "Shēnzhèn",
+		"name_simplified" : "深圳",
+		"name_traditional" : "深圳"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Wuhan",
+		"name_pinyin" : "Wǔhàn",
+		"name_simplified" : "武汉",
+		"name_traditional" : "武漢"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hangzhou",
+		"name_pinyin" : "Hángzhōu",
+		"name_simplified" : "杭州",
+		"name_traditional" : "杭州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Xi'an",
+		"name_pinyin" : "Xī'ān",
+		"name_simplified" : "西安",
+		"name_traditional" : "西安"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shenyang",
+		"name_pinyin" : "Shěnyáng",
+		"name_simplified" : "沈阳",
+		"name_traditional" : "瀋陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Nanjing",
+		"name_pinyin" : "Nánjīng",
+		"name_simplified" : "南京",
+		"name_traditional" : "南京"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Changchun",
+		"name_pinyin" : "Chángchūn",
+		"name_simplified" : "长春",
+		"name_traditional" : "長春"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shangqiu",
+		"name_pinyin" : "Shāngqiū",
+		"name_simplified" : "商丘",
+		"name_traditional" : "商丘"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hong Kong",
+		"name_pinyin" : "Xiānggǎng",
+		"name_simplified" : "香港",
+		"name_traditional" : "香港"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Taipei",
+		"name_pinyin" : "Táiběi",
+		"name_simplified" : "台北",
+		"name_traditional" : "臺北"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Jinan",
+		"name_pinyin" : "Jǐnán",
+		"name_simplified" : "济南",
+		"name_traditional" : "濟南"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Dalian",
+		"name_pinyin" : "Dàlián",
+		"name_simplified" : "大连",
+		"name_traditional" : "大連"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Taiyuan",
+		"name_pinyin" : "Tàiyuán",
+		"name_simplified" : "太原",
+		"name_traditional" : "太原"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "New Taipei",
+		"name_pinyin" : "Xīnběi",
+		"name_simplified" : "新北",
+		"name_traditional" : "新北"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Kunming",
+		"name_pinyin" : "Kūnmíng",
+		"name_simplified" : "昆明",
+		"name_traditional" : "昆明"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Wuxi",
+		"name_pinyin" : "Wúxī",
+		"name_simplified" : "无锡",
+		"name_traditional" : "無錫"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shijiazhuang",
+		"name_pinyin" : "Shíjiāzhuāng",
+		"name_simplified" : "石家庄",
+		"name_traditional" : "石家莊"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Zhengzhou",
+		"name_pinyin" : "Zhèngzhōu",
+		"name_simplified" : "郑州",
+		"name_traditional" : "鄭州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Nanning",
+		"name_pinyin" : "Nánníng",
+		"name_simplified" : "南宁",
+		"name_traditional" : "南寧"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Nanchang",
+		"name_pinyin" : "Nánchāng",
+		"name_simplified" : "南昌",
+		"name_traditional" : "南昌"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Changsha",
+		"name_pinyin" : "Chángshā",
+		"name_simplified" : "长沙",
+		"name_traditional" : "長沙"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Qingdao",
+		"name_pinyin" : "Qīngdǎo",
+		"name_simplified" : "青岛",
+		"name_traditional" : "青島"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Lanzhou",
+		"name_pinyin" : "Lánzhōu",
+		"name_simplified" : "兰州",
+		"name_traditional" : "蘭州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Suzhou",
+		"name_pinyin" : "Sūzhōu",
+		"name_simplified" : "苏州",
+		"name_traditional" : "蘇州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hefei",
+		"name_pinyin" : "Héféi",
+		"name_simplified" : "合肥",
+		"name_traditional" : "合肥"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Nanchong",
+		"name_pinyin" : "Nánchōng",
+		"name_simplified" : "南充",
+		"name_traditional" : "南充"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Xiamen",
+		"name_pinyin" : "Xiàmén",
+		"name_simplified" : "厦门",
+		"name_traditional" : "廈門"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Fuzhou",
+		"name_pinyin" : "Fúzhōu",
+		"name_simplified" : "福州",
+		"name_traditional" : "福州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Jilin City",
+		"name_pinyin" : "Jílín Shì",
+		"name_simplified" : "吉林市",
+		"name_traditional" : "吉林市"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Nanyang",
+		"name_pinyin" : "Nányáng",
+		"name_simplified" : "南阳",
+		"name_traditional" : "南陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Ürümqi",
+		"name_pinyin" : "Wūlǔmùqí",
+		"name_simplified" : "乌鲁木齐",
+		"name_traditional" : "烏魯木齊"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Foshan",
+		"name_pinyin" : "Fóshān",
+		"name_simplified" : "佛山",
+		"name_traditional" : "佛山"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Guiyang",
+		"name_pinyin" : "Guìyáng",
+		"name_simplified" : "贵阳",
+		"name_traditional" : "貴陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Benxi",
+		"name_pinyin" : "Běnxī",
+		"name_simplified" : "本溪",
+		"name_traditional" : "本溪"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Ningbo",
+		"name_pinyin" : "Níngbō",
+		"name_simplified" : "宁波",
+		"name_traditional" : "寧波"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Weifang",
+		"name_pinyin" : "Wéifāng",
+		"name_simplified" : "潍坊",
+		"name_traditional" : "濰坊"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Kaohsiung",
+		"name_pinyin" : "Gāoxióng",
+		"name_simplified" : "高雄",
+		"name_traditional" : "高雄"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Datong",
+		"name_pinyin" : "Dàtóng",
+		"name_simplified" : "大同",
+		"name_traditional" : "大同"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Anshan",
+		"name_pinyin" : "Ānshān",
+		"name_simplified" : "鞍山",
+		"name_traditional" : "鞍山"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Baotou",
+		"name_pinyin" : "Bāotóu",
+		"name_simplified" : "包头",
+		"name_traditional" : "包頭"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Neijiang",
+		"name_pinyin" : "Nèijiāng",
+		"name_simplified" : "内江",
+		"name_traditional" : "内江"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Fushun",
+		"name_pinyin" : "Fǔshùn",
+		"name_simplified" : "抚顺",
+		"name_traditional" : "撫順"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Xuzhou",
+		"name_pinyin" : "Xúzhōu",
+		"name_simplified" : "徐州",
+		"name_traditional" : "徐州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Yantai",
+		"name_pinyin" : "Yāntái",
+		"name_simplified" : "烟台",
+		"name_traditional" : "煙臺"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Yiyang",
+		"name_pinyin" : "Yìyáng",
+		"name_simplified" : "益阳",
+		"name_traditional" : "益陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Changde",
+		"name_pinyin" : "Chángdé",
+		"name_simplified" : "常德",
+		"name_traditional" : "常德"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Tangshan",
+		"name_pinyin" : "Tángshān",
+		"name_simplified" : "唐山",
+		"name_traditional" : "唐山"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Luoyang",
+		"name_pinyin" : "Luòyáng",
+		"name_simplified" : "洛阳",
+		"name_traditional" : "洛陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Mianyang",
+		"name_pinyin" : "Miányáng",
+		"name_simplified" : "绵阳",
+		"name_traditional" : "綿陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hohhot",
+		"name_pinyin" : "Hūhéhàotè",
+		"name_simplified" : "呼和浩特",
+		"name_traditional" : "呼和浩特"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Shantou",
+		"name_pinyin" : "Shàntóu",
+		"name_simplified" : "汕头",
+		"name_traditional" : "汕頭"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Jingzhou",
+		"name_pinyin" : "Jīngzhōu",
+		"name_simplified" : "荆州",
+		"name_traditional" : "荆州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Baoding",
+		"name_pinyin" : "Bǎodìng",
+		"name_simplified" : "保定",
+		"name_traditional" : "保定"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Anyang",
+		"name_pinyin" : "Ānyáng",
+		"name_simplified" : "安阳",
+		"name_traditional" : "安陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Liuzhou",
+		"name_pinyin" : "Liǔzhōu",
+		"name_simplified" : "柳州",
+		"name_traditional" : "柳州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Luzhou",
+		"name_pinyin" : "Lúzhōu",
+		"name_simplified" : "泸州",
+		"name_traditional" : "瀘州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Handan",
+		"name_pinyin" : "Hándān",
+		"name_simplified" : "邯郸",
+		"name_traditional" : "邯鄲"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Quanzhou",
+		"name_pinyin" : "Quánzhōu",
+		"name_simplified" : "泉州",
+		"name_traditional" : "泉州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hengyang",
+		"name_pinyin" : "Héngyáng",
+		"name_simplified" : "衡阳",
+		"name_traditional" : "衡陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Xining",
+		"name_pinyin" : "Xīníng",
+		"name_simplified" : "西宁",
+		"name_traditional" : "西寧"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Huainan",
+		"name_pinyin" : "Huáinán",
+		"name_simplified" : "淮南",
+		"name_traditional" : "淮南"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Yinchuan",
+		"name_pinyin" : "Yínchuān",
+		"name_simplified" : "银川",
+		"name_traditional" : "銀川"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Changzhou",
+		"name_pinyin" : "Chángzhōu",
+		"name_simplified" : "常州",
+		"name_traditional" : "常州"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Huai'an",
+		"name_pinyin" : "Huái'ān",
+		"name_simplified" : "淮安",
+		"name_traditional" : "淮安"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Yichang",
+		"name_pinyin" : "Yíchāng",
+		"name_simplified" : "宜昌",
+		"name_traditional" : "宜昌"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Xiangyang",
+		"name_pinyin" : "Xiāngyáng",
+		"name_simplified" : "襄阳",
+		"name_traditional" : "襄陽"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Macau",
+		"name_pinyin" : "Àomén",
+		"name_simplified" : "澳门",
+		"name_traditional" : "澳門"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Chiayi",
+		"name_pinyin" : "Jiāyì",
+		"name_simplified" : "嘉义",
+		"name_traditional" : "嘉義"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Keelung",
+		"name_pinyin" : "Jīlóng",
+		"name_simplified" : "基隆",
+		"name_traditional" : "基隆"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Taoyuan",
+		"name_pinyin" : "Táoyuán",
+		"name_simplified" : "桃园",
+		"name_traditional" : "桃園"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Hsinchu",
+		"name_pinyin" : "Xīnzhú",
+		"name_simplified" : "新竹",
+		"name_traditional" : "新竹"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Tainan",
+		"name_pinyin" : "Táinán",
+		"name_simplified" : "台南",
+		"name_traditional" : "臺南"
+	}, {
+		"json_class" : "ChineseCity",
+		"name_european" : "Taichung",
+		"name_pinyin" : "Táizhōng",
+		"name_simplified" : "台中",
+		"name_traditional" : "臺中"
+	}
+]
