@@ -216,7 +216,13 @@
 					if (!error) {
 						try {
 							var x = parseInt($("#create-station-x").val());
+							if (isNaN(x)) {
+								x = vm.generateRandomX();
+							}
 							var y = parseInt($("#create-station-y").val());
+							if (isNaN(y)) {
+								y = vm.generateRandomY();
+							}
 							var newStation = new Station(vm.stations[vm.stations.length - 1].id + 1, name, x, y);
 							vm.stations.push(newStation);
 							vm.drawStations(vm.stations);
@@ -244,22 +250,18 @@
 			modal: true,
 			buttons: {
 				"Speichern": function() {
+					var numeric = vm.convertStationIds([$("#create-line-station1").val(), $("#create-line-station2").val()]);
+					var stationId1 = numeric[0];
+					var stationId2 = numeric[1];
 					var name = $.trim($("#create-line-name").val());
-					var error = name.length == 0;
-					if (!error) {
-						try {
-							var numeric = vm.convertStationIds([$("#create-line-station1").val(), $("#create-line-station2").val()]);
-							var stationId1 = numeric[0];
-							var stationId2 = numeric[1];
-							var newLine = new Line(vm.lines[vm.lines.length - 1].id + 1, name, stationId1, stationId2);
-							vm.lines.push(newLine);
-							vm.drawLines(vm.lines);
-							vm.reinitMultiselects(vm.stations, vm.lines);
-							$(this).dialog("close");
-						} catch (exc) {
-							error = true;
-						}
+					if (name.length == 0) {
+						name = vm.buildLineName(vm.lookupStation(stationId1), vm.lookupStation(stationId2));
 					}
+					var newLine = new Line(vm.lines[vm.lines.length - 1].id + 1, name, stationId1, stationId2);
+					vm.lines.push(newLine);
+					vm.drawLines(vm.lines);
+					vm.reinitMultiselects(vm.stations, vm.lines);
+					$(this).dialog("close");
 				},
 				Cancel: function() {
 					$(this).dialog("close");
@@ -269,6 +271,10 @@
 			}
 		});
 	};
+	
+	this.buildLineName = function(station1, station2) {
+		return station1.name + " --- " + station2.name;
+	}
 
 	this.initCreateFsaDialog = function(stations, lines) {
 		var timeWindowFrom = $("#create-fsa-time-window-from");
@@ -440,6 +446,20 @@
 		newFsa.stations = this.convertStationIds($("#create-fsa-stations").val());
 		newFsa.lines = this.convertLineIds($("#create-fsa-lines").val());
 		
+		if ($.trim(newFsa.fsaName).length == 0) {
+			if (newFsa.stations.length > 0) {
+				newFsa.fsaName = "FSA für " + this.lookupStation(newFsa.stations[0]).name + (newFsa.stations.length > 1 || newFsa.lines.length > 0 ? ", ..." : "");
+			} else if (newFsa.lines.length > 0) {
+				newFsa.fsaName = "FSA für " + this.lookupLine(newFsa.lines[0]).name + (newFsa.lines.length > 1 ? ", ..." : "");
+			}
+		}
+		if ($.trim(newFsa.from).length == 0) {
+			newFsa.from = "01.01.2013";
+		}
+		if ($.trim(newFsa.until).length == 0) {
+			newFsa.until = "31.12.2013";
+		}
+		
 		this.fsa.fsa.push(newFsa);
 		
 		// Update graph...
@@ -498,8 +518,8 @@
 				var index = Math.floor(Math.random() * chineseCitiesJson.length);
 				if ($.inArray(index, selected) == -1) {
 					selected.push(index);
-					var x = 100 + Math.floor(Math.random() * 250);
-					var y = 100 + Math.floor(Math.random() * 600);
+					var x = vm.generateRandomX();
+					var y = vm.generateRandomY();
 					vm.stations.push(
 						new Station(vm.stations[vm.stations.length - 1].id + 1, 
 							chineseCitiesJson[index].name_european + " (" + chineseCitiesJson[index].name_simplified + ")", 
@@ -523,13 +543,21 @@
 					}
 					if (!dupe) {
 						pairs.push([ index1, index2 ]);
-						vm.lines.push(new Line(vm.lines[vm.lines.length - 1].id + 1, vm.stations[index1].name + " --- " + vm.stations[index2].name, vm.stations[index1].id, vm.stations[index2].id));
+						vm.lines.push(new Line(vm.lines[vm.lines.length - 1].id + 1, vm.buildLineName(vm.stations[index1], vm.stations[index2]), vm.stations[index1].id, vm.stations[index2].id));
 					}
 				}
 			}
 			vm.drawLines(vm.lines);
 			vm.reinitMultiselects(vm.stations, vm.lines);
 		});
+	};
+	
+	this.generateRandomX = function() {
+		return 100 + Math.floor(Math.random() * 250);
+	};
+	
+	this.generateRandomY = function() {
+		return 100 + Math.floor(Math.random() * 600);
 	};
 }
 
