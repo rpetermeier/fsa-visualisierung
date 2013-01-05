@@ -142,8 +142,8 @@
 
 	this.colorForStation = function (station) {
 		var returnColor;
-		if (vm.isStationDisconnected(station.id)) { returnColor = "grey"; }
-		else { returnColor = "magenta"; }
+		if (vm.isStationDisconnected(station.id)) { returnColor = "Silver"; }
+		else { returnColor = "SeaGreen"; }
 		return returnColor;
 	};
 
@@ -177,8 +177,8 @@
 
 	this.colorForLine = function(line) {
 		var returnColor;
-		if (vm.isLineDisconnected(line.id)) { returnColor = "grey"; }
-		else { returnColor = "magenta"; }
+		if (vm.isLineDisconnected(line.id)) { returnColor = "Silver"; }
+		else { returnColor = "SeaGreen"; }
 		return returnColor;
 	};
 
